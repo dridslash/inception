@@ -1,0 +1,11 @@
+FROM debian:buster
+
+RUN apt -y update && apt -y upgrade && apt install -y php-fpm && apt-get install -y php-mysql php-phar && apt -y install curl 
+
+WORKDIR /var/www/html
+
+COPY /tools/script_wordpress.sh /script_wordpress.sh
+
+RUN chmod +x /script_wordpress.sh
+
+CMD ["/script_wordpress.sh"]

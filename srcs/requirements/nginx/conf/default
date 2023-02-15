@@ -1,0 +1,21 @@
+server {
+	    listen 443 ssl;
+		listen [::]:443 ssl;
+		root /var/www/html;
+		index index.php;
+		ssl_certificate /etc/ssl/certs/nginx.crt;
+		ssl_certificate_key /etc/ssl/private/nginx.key;
+		server_name wwwm.g.ma g.ma;
+		access_log /var/log/nginx/nginx.vhost.access.log;
+		error_log /var/log/nginx/nginx.vhost.error.log;
+		ssl_protocols TLSv1.2;
+    # First attempt to serve request as file, then
+    # as directory, then fall back to displaying a 404.
+		location ~ \.php$ {
+			try_files $uri $uri/ =404;
+			fastcgi_split_path_info ^(.+\.php)(/.+)$;
+            fastcgi_pass   wordpress:9000;
+            include fastcgi_params;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+		}
+}
