@@ -45,14 +45,14 @@ networks:
 
 volumes:
     wordpress:
-#       name: wordpress
+      name: wordpress
 #       driver: local
 #       driver_opts:
 #         device: /home/mnaqqad/data/wordpress
 #         o: bind
 #         type: none
     mariadb:
-#       name: mariadb
+      name: mariadb
 #       driver: local
 #       driver_opts:
 #         device: /home/mnaqqad/data/mariadb
