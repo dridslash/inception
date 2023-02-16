@@ -5,7 +5,7 @@ server {
 		index index.php;
 		ssl_certificate /etc/ssl/certs/nginx.crt;
 		ssl_certificate_key /etc/ssl/private/nginx.key;
-		server_name wwwm.g.ma g.ma;
+		server_name www.mnaqqad.42.fr mnaqqad.42.fr;
 		access_log /var/log/nginx/nginx.vhost.access.log;
 		error_log /var/log/nginx/nginx.vhost.error.log;
 		ssl_protocols TLSv1.2;

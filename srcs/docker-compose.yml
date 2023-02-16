@@ -1,11 +1,11 @@
-version : '3'
+version : '3.5'
 
 services:
   nginx:
-      image : nginx_image
+      image : nginx
       depends_on:
         - wordpress
-      container_name : nginx
+      container_name : nginx_cont
       build :
         context: ./requirements/nginx
         # dockerfile: dockerfile.nginx
@@ -15,30 +15,31 @@ services:
         - second_kick
       volumes:
         - wordpress:/var/www/html
+      restart : always
   wordpress:
-      image : wordpress_image
-      container_name : wordpress
+      image : wordpress
+      container_name : wordpress_cont
       depends_on:
         - mariadb
       networks:
         - second_kick
       build :
         context: ./requirements/wordpress
-        # dockerfile: dockerfile.wordpress
       env_file: .env
       volumes:
         - wordpress:/var/www/html
+      restart : always
   mariadb:
-      image : mariadb_image
-      container_name : mariadb
+      image : mariadb
+      container_name : mariadb_cont
       networks:
         - second_kick
       build :
         context: ./requirements/mariadb
-        # dockerfile: dockerfile.mariadb
       env_file: .env
       volumes:
         - mariadb:/var/lib/mysql
+      restart : always
 networks:
     second_kick:
       name: second_kick
@@ -46,17 +47,18 @@ networks:
 volumes:
     wordpress:
       name: wordpress
-      # driver: local
-      # driver_opts:
-      #   device: /home/mnaqqad/data/wordpress
-      #   o: bind
-      #   type: none
+      driver: local
+      driver_opts:
+       o: bind
+       type: none
+       device: /home/mnaqqad/data/wordpress
+  
     mariadb:
       name: mariadb
-      # driver: local
-      # driver_opts:
-      #   device: /home/mnaqqad/data/mariadb
-      #   o: bind
-      #   type: none
+      driver: local
+      driver_opts:
+        device: /home/mnaqqad/data/mariadb
+        o: bind
+        type: none
   
 
