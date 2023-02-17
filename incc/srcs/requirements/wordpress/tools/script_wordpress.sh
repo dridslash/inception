@@ -1,7 +1,5 @@
 #!/bin/bash
 
-sleep 1
-
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 
 chmod +x wp-cli.phar
@@ -20,8 +18,6 @@ sed -i "s/localhost/$DB_HOST/g"    wp-config.php
 wp core install --url=$DOMAIN_NAME --title="WP-CLI" --admin_user=$ADMIN_USER --admin_password=$ADMIN_PASS --admin_email=info@wp-cli.org --skip-email --allow-root
 
 wp user create hello hello@ss.com --role=author --user_pass=123 --allow-root
-
-# wp theme install Twenty-Twenty-Two --activate  --allow-root
 
 wp theme activate twentytwentytwo --allow-root
 
